@@ -22,7 +22,8 @@
       "attr": "houseStructure",
       "label": "Haus-Struktur (JSON)",
       "newLine": true,
-      "default": "{\n  \"floors\": []\n}"
+      "default": { "floors": [], "haus": [] },
+      "useString": false
     }
   ]
 }

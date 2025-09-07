@@ -26,7 +26,7 @@
 "native": {
   "port": 9400,
   "token": "",
-  "houseStructure": "{\n  \"floors\": []\n}"
+  "houseStructure": { "floors": [], "haus": [] }
 },
 "objects": [],
 "instanceObjects": []
