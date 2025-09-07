@@ -1,4 +1,4 @@
-﻿{
+{
   "type": "panel",
   "items": [
     { "type": "number", "attr": "port", "label": "WebSocket-Port", "min": 1, "max": 65535 },
