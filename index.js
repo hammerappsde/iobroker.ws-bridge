@@ -17,13 +17,15 @@ class WsBridge extends utils.Adapter {
 
     this.port = 9400;
     this.token = '';
-    this.houseStructure = { floorese: [] };
+    this.houseStructure = { floors: [] };
 
     this.on('ready', this.onReady.bind(this));
     this.on('unload', this.onUnload.bind(this));
   }
 
   async onReady() {
+    this.log.info(`WS-BRIDGE STARTED from ${__filename} @${new Date().toISOString()} ###MARKER:42###`);
+
     // 1) Dateien laden
     const cfg = this.readJSON(this.configPath, { port: 9400, token: '' });
     this.port = Number(cfg.port) || 9400;
@@ -36,7 +38,7 @@ class WsBridge extends utils.Adapter {
       // Token prüfen
       try {
         const url = new URL(req.url || '/', 'http://localhost');
-        const qToken = url.searchParams.get('token') || '';
+        const qToken = url.searchParams.get('token') || ''; 
         if (this.token && qToken !== this.token) {
           ws.close(1008, 'invalid token');
           return;
