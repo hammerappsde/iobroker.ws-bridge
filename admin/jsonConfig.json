@@ -14,7 +14,7 @@
       "attr": "token",
       "label": "Token (optional)",
       "password": true,
-      "newLine": true,
+      "newLine": false,
       "default": ""
     },
     {

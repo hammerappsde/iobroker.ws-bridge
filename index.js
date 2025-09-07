@@ -6,6 +6,7 @@ const { WebSocketServer } = require('ws');
 class WsBridge extends utils.Adapter {
   constructor(options) {
     super({ ...options, name: 'ws-bridge' });
+
     this.wss = null;
     this.clients = new Set();
 
@@ -15,25 +16,18 @@ class WsBridge extends utils.Adapter {
 
     this.on('ready', this.onReady.bind(this));
     this.on('unload', this.onUnload.bind(this));
-
-    // Keine stateChange-Events mehr nötig, solange keine Whitelist/Streams gewünscht sind
-    // this.on('stateChange', this.onStateChange.bind(this));
   }
 
   async onReady() {
-    // 1) Config aus io-package.json -> native
+    // nur die drei Settings laden
     this.port = Number(this.config.port) || 9400;
     this.token = (this.config.token || '').toString();
     this.houseStructure = this.safeParseJSON(this.config.houseStructure, { floors: [] });
-    if (!this.validateStructure(this.houseStructure)) {
-      this.log.warn('houseStructure has invalid shape. Falling back to { floors: [] }');
-      this.houseStructure = { floors: [] };
-    }
 
-    // 2) WebSocket-Server starten
+    // WS-Server starten
     this.wss = new WebSocketServer({ port: this.port });
     this.wss.on('connection', (ws, req) => {
-      // Token prüfen (optional)
+      // Token prüfen
       try {
         const url = new URL(req.url || '/', 'http://localhost');
         const qToken = url.searchParams.get('token') || '';
@@ -48,49 +42,53 @@ class WsBridge extends utils.Adapter {
 
       this.clients.add(ws);
       ws.on('close', () => this.clients.delete(ws));
-
-      // Begrüßung + Hausstruktur senden
-      ws.send(JSON.stringify({
-        type: 'hello',
-        adapter: 'ws-bridge',
-        time: new Date().toISOString()
-      }));
-      ws.send(JSON.stringify({
-        type: 'structure',
-        structure: this.houseStructure
-      }));
+      ws.on('message', (buf) => this.onClientMessage(ws, buf.toString()));
     });
 
-    this.log.info(`WebSocket server listening on port ${this.port}`);
+    this.log.info(`ws-bridge listening on port ${this.port}`);
   }
 
-  // ---- Helpers ----
+  // --- minimaler Request-Handler: nur getStructure ---
+  onClientMessage(ws, raw) {
+    let msg = raw;
+    try {
+      // akzeptiere sowohl JSON {"type":"getStructure"} als auch plain "getStructure"
+      msg = JSON.parse(raw);
+    } catch { /* raw bleibt string */ }
+
+    const isGet =
+      (typeof msg === 'string' && msg === 'getStructure') ||
+      (msg && typeof msg === 'object' && msg.type === 'getStructure');
+
+    if (isGet) {
+      ws.send(JSON.stringify({ type: 'structure', structure: this.houseStructure }));
+      return;
+    }
+
+    // optional: kurze Fehlermeldung für unbekannte Messages
+    ws.send(JSON.stringify({ type: 'error', error: 'unknown request' }));
+  }
+
+  // --- helpers ---
   safeParseJSON(text, fallback) {
-    if (text && typeof text === 'object') return text; // bereits geparst
+    if (text && typeof text === 'object') return text;
     try { return JSON.parse(text); }
-    catch (e) {
-      this.log.warn(`Invalid JSON in houseStructure: ${String(e)}`);
+    catch {
+      this.log.warn('houseStructure is not valid JSON; using fallback {floors: []}');
       return fallback;
     }
   }
 
-  validateStructure(s) {
-    // Minimalprüfung: Objekt mit Array "floors"
-    return !!(s && typeof s === 'object' && Array.isArray(s.floors));
-  }
-
-  onUnload(callback) {
+  onUnload(cb) {
     try {
       if (this.wss) {
-        for (const ws of this.clients) {
-          try { ws.terminate(); } catch {}
-        }
+        for (const ws of this.clients) { try { ws.terminate(); } catch {} }
         this.wss.close();
       }
       this.clients.clear();
-      callback();
-    } catch (e) {
-      callback();
+      cb();
+    } catch {
+      cb();
     }
   }
 }
