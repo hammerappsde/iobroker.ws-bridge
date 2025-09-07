@@ -1,15 +1,30 @@
 {
   "type": "panel",
   "items": [
-    { "type": "number", "attr": "port", "label": "WebSocket-Port", "min": 1, "max": 65535 },
-    { "type": "text", "attr": "token", "label": "Token (optional)", "newLine": true },
     {
-      "type": "textarea",
+      "type": "number",
+      "attr": "port",
+      "label": "WebSocket-Port",
+      "min": 1,
+      "max": 65535,
+      "default": 9400
+    },
+    {
+      "type": "text",
+      "attr": "token",
+      "label": "Token (optional)",
+      "password": true,
+      "newLine": true,
+      "default": ""
+    },
+    {
+      "type": "text",
       "attr": "houseStructure",
       "label": "Haus-Struktur (JSON)",
+      "multiline": true,
       "rows": 16,
-      "default": "{\n  \"floors\": []\n}",
-      "newLine": true
+      "newLine": true,
+      "default": "{\n  \"floors\": []\n}"
     }
   ]
 }
