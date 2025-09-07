@@ -1,3 +1,23 @@
 {
-  "wohnungen": []
+  "wohnungen": [
+    {
+      "name": "Wohnung 1",
+      "floors": [
+        {
+          "name": "Erdgeschoss",
+          "rooms": [
+            { "name": "Wohnzimmer" },
+            { "name": "Küche" }
+          ]
+        },
+        {
+          "name": "Obergeschoss",
+          "rooms": [
+            { "name": "Schlafzimmer" },
+            { "name": "Badezimmer" }
+          ]
+        }
+      ]
+    }
+  ]
 }

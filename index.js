@@ -17,7 +17,7 @@ class WsBridge extends utils.Adapter {
 
     this.port = 9400;
     this.token = '';
-    this.houseStructure = { floors: [] };
+    this.houseStructure = { wohnungen: [] };
 
     this.on('ready', this.onReady.bind(this));
     this.on('unload', this.onUnload.bind(this));
@@ -30,7 +30,7 @@ class WsBridge extends utils.Adapter {
     const cfg = this.readJSON(this.configPath, { port: 9400, token: '' });
     this.port = Number(cfg.port) || 9400;
     this.token = (cfg.token || '').toString();
-    this.houseStructure = this.readJSON(this.housePath, { floors: [] });
+    this.houseStructure = this.readJSON(this.housePath, { wohnungen: [] });
 
     // 2) WS-Server starten
     this.wss = new WebSocketServer({ port: this.port });
