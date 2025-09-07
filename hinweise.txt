@@ -1,5 +1,19 @@
-﻿cd /opt/iobroker && npm i git+https://github.com/hammerappsde/iobroker.ws-bridge.git#main
+﻿### GIT UPDATES
 
+git add .   
+
+### CONTAINER
+
+### Git Pull
+cd /opt/iobroker && npm i git+https://github.com/hammerappsde/iobroker.ws-bridge.git#main
+
+### Adapter Update
 cd /opt/iobroker && ./iobroker add ws-bridge
 
+### Adapter Init
 cd /opt/iobroker && ./iobroker upload ws-bridge && ./iobroker restart ws-bridge
+
+
+### WSCAT
+npx wscat -c "ws://192.168.10.2:9400?token=abc"
+> {"type":"get","ids":["0_userdata.0.*"]}
