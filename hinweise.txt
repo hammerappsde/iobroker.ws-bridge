@@ -1,0 +1,5 @@
+﻿cd /opt/iobroker && npm i git+https://github.com/hammerappsde/iobroker.ws-bridge.git#main
+
+cd /opt/iobroker && ./iobroker add ws-bridge
+
+cd /opt/iobroker && ./iobroker upload ws-bridge && ./iobroker restart ws-bridge
