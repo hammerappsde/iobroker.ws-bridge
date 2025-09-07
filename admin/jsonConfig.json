@@ -18,11 +18,9 @@
       "default": ""
     },
     {
-      "type": "text",
+      "type": "jsonEditor",
       "attr": "houseStructure",
       "label": "Haus-Struktur (JSON)",
-      "multiline": true,
-      "rows": 16,
       "newLine": true,
       "default": "{\n  \"floors\": []\n}"
     }
