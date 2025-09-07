@@ -1,0 +1,33 @@
+﻿{
+"common": {
+"name": "ws-bridge",
+"version": "0.0.1",
+"title": "WebSocket Bridge",
+"titleLang": {
+"en": "WebSocket Bridge",
+"de": "WebSocket‑Brücke"
+},
+"news": {
+"0.0.1": {
+"en": "Initial release",
+"de": "Erste Version"
+}
+},
+"license": "MIT",
+"platform": "Javascript/Node.js",
+"icon": "",
+"mode": "daemon",
+"type": "communication",
+"enabled": true,
+"loglevel": "info",
+"compact": true
+},
+"native": {
+"port": 9400,
+"token": "",
+"allowWrite": false,
+"exposeStates": ["0_userdata.0.*"]
+},
+"objects": [],
+"instanceObjects": []
+}

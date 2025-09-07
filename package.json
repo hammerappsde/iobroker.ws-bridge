@@ -1,0 +1,17 @@
+{
+  "name": "iobroker.ws-bridge",
+  "version": "0.0.1",
+  "description": "Adapter mit Websocket für WebApp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "René Gehlert",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "@iobroker/adapter-core": "^3.3.2",
+    "ws": "^8.18.3"
+  }
+}
