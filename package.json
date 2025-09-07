@@ -1,6 +1,6 @@
 {
   "name": "iobroker.ws-bridge",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Adapter mit Websocket für WebApp",
   "main": "index.js",
   "scripts": {
