@@ -1,0 +1,9 @@
+﻿{
+  "type": "panel",
+  "items": [
+    { "type": "number",   "attr": "port",        "label": "WebSocket-Port", "min": 1, "max": 65535 },
+    { "type": "text",     "attr": "token",       "label": "Token (optional)" },
+    { "type": "checkbox", "attr": "allowWrite",  "label": "Write-Back erlauben" },
+    { "type": "array",    "attr": "exposeStates","label": "Exponierte States/Patterns" }
+  ]
+}
