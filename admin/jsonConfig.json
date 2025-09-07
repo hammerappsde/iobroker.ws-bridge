@@ -7,7 +7,9 @@
       "type": "textarea",
       "attr": "houseStructure",
       "label": "Haus-Struktur (JSON)",
-      "rows": 16
+      "rows": 16,
+      "default": "{\n  \"floors\": []\n}",
+      "newLine": true
     }
   ]
 }
