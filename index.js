@@ -17,7 +17,7 @@ class WsBridge extends utils.Adapter {
 
     this.port = 9400;
     this.token = '';
-    this.houseStructure = { floors: [] };
+    this.houseStructure = { floorese: [] };
 
     this.on('ready', this.onReady.bind(this));
     this.on('unload', this.onUnload.bind(this));
