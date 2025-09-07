@@ -4,18 +4,27 @@ git add .
 git commit -m "..."
 git push
 
+
 ### CONTAINER
 
 ### Git Pull
 cd /opt/iobroker && npm i git+https://github.com/hammerappsde/iobroker.ws-bridge.git#main
 
-### Adapter Installieren
-cd /opt/iobroker && ./iobroker add ws-bridge
-
 ### Adapter Update
 cd /opt/iobroker && ./iobroker upload ws-bridge && ./iobroker restart ws-bridge
+
+### Adapter Installieren
+cd /opt/iobroker && ./iobroker add ws-bridge
 
 
 ### WSCAT
 npx wscat -c "ws://192.168.10.2:9400?token=abc"
 > {"type":"get","ids":["0_userdata.0.*"]}
+
+
+### LÖSCHEN
+./iobroker stop ws-bridge.0
+./iobroker del ws-bridge.0
+./iobroker del ws-bridge || true
+./iobroker object del system.adapter.ws-bridge.0 --force || true
+npm remove iobroker.ws-bridge || true

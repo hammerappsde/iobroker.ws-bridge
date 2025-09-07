@@ -1,7 +1,7 @@
 {
 "common": {
     "name": "ws-bridge",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "title": "WebSocket Bridge",
     "adminUI": { "config": "json" },
     "titleLang": {
@@ -23,11 +23,7 @@
     "loglevel": "info",
     "compact": true
 },
-"native": {
-  "port": 9400,
-  "token": "",
-  "houseStructure": { "floors": [], "haus": [] }
-},
+"native": {},
 "objects": [],
 "instanceObjects": []
 }
