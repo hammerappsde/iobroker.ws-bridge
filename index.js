@@ -13,7 +13,7 @@ class WsBridge extends utils.Adapter {
 
     // Dateipfade relativ zum Adapter-Ordner
     this.configPath = path.resolve(__dirname, 'data', 'config.json');
-    this.housePath  = path.resolve(__dirname, 'data', 'house.json');
+    this.housePath  = path.resolve(__dirname, 'data', 'haus.json');
 
     this.port = 9400;
     this.token = '';
