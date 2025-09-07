@@ -1,29 +1,35 @@
 {
-  "type": "panel",
-  "items": [
-    {
-      "type": "number",
-      "attr": "port",
-      "label": "WebSocket-Port",
-      "min": 1,
-      "max": 65535,
-      "default": 9400
-    },
-    {
-      "type": "text",
-      "attr": "token",
-      "label": "Token (optional)",
-      "password": true,
-      "newLine": false,
-      "default": ""
-    },
-    {
-      "type": "jsonEditor",
-      "attr": "houseStructure",
-      "label": "Haus-Struktur (JSON)",
-      "newLine": true,
-      "default": { "floors": [], "haus": [] },
-      "useString": false
+  "type": "tabs",
+  "items": {
+    "general": {
+      "type": "panel",
+      "label": "Allgemein",
+      "items": {
+        "port": {
+          "type": "number",
+          "attr": "port",
+          "label": "WebSocket-Port",
+          "min": 1,
+          "max": 65535,
+          "default": 9400
+        },
+        "token": {
+          "type": "text",
+          "attr": "token",
+          "label": "Token (optional)",
+          "password": true,
+          "newLine": false,
+          "default": ""
+        },
+        "houseStructure": {
+          "type": "jsonEditor",
+          "attr": "houseStructure",
+          "label": "Haus-Struktur (JSON)",
+          "newLine": true,
+          "default": { "floors": [], "haus": [] },
+          "useString": false
+        }
+      }
     }
-  ]
+  }
 }
